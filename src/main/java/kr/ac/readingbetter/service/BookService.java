@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.readingbetter.dao.BookDao;
 import kr.ac.readingbetter.vo.BookVo;
+import kr.ac.readingbetter.vo.PublisherVo;
 
 @Service
 public class BookService {
@@ -43,5 +44,9 @@ public class BookService {
 	public List<BookVo> getListService(BookVo vo) {
 		List<BookVo> list = bookDao.getListService(vo);
 		return list;
+	}
+	
+	public void insert(BookVo vo) {
+		bookDao.insert(vo);
 	}
 }

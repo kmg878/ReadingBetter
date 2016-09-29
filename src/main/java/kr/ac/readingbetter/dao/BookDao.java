@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.readingbetter.vo.BookVo;
 
+
 @Repository
 public class BookDao {
 
@@ -48,5 +49,9 @@ public class BookDao {
 	public List<BookVo> findBookReplace(String title) {
 		List<BookVo> bookList = sqlSession.selectList("book.findBookReplace", title);
 		return bookList;
+	}
+	
+	public void insert(BookVo vo) {
+		sqlSession.insert("book.insert", vo);
 	}
 }

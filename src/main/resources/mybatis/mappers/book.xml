@@ -80,5 +80,12 @@
 				where re_title like '%' || #{kwd} || '%'
 		]]>
 	</select>
+	
+	<!-- 책 추가 -->
+	<insert id="insert" parameterType="bookvo">
+		<![CDATA[
+			insert into book values(seq_book.nextval,#{title},#{recommend},#{cover},#{publisherNo},#{authorNo})
+		]]>
+	</insert>
 
 </mapper>
