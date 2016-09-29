@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+
+@import "readingbetter.css";
+
+/* main */
+/* 메인 네비게이션 */
+/* 로그인박스 */
+#main #loginbox {
+	border:1px solid #149EF9;
+	padding:10px;
+	text-align:center;
+	background-color:#FBFEFE;
+}
+#main  #loginbox h4 { text-align:left; }
+#main  #loginbox h4 a { float:right; font-size:0.75em; }
+#main  #loginbox form { margin-bottom:10px; }
+#main #myinfo_mini { margin-top:20px; text-align:left; font-size:0.85em; }
+/* 검색 박스 */
+#search { border:1px solid #149EF9; margin:10px 0; padding:10px; }
+.searchform { text-align:right; }
+#helpcall { text-align:left; }
+/* 컨텐츠 */
+#main #today_book_box,
+#main #notice_box,
+#main #ranking_box {
+	width:100%;
+	margin:10px;
+	border:1px solid #333;
+	padding:10px;
+	text-align:center;
+	background-color:#FBFEFE;
+	border-radius:20px;
+}
+/* 탭뷰 */
+#main .tab-box,
+#main .tab-box2 { margin:10px; text-align:center; }
+#main .tab-box ul,
+#main .tab-box2 ul { list-style-type:none; height:30px; }
+#main .tab-box ul li,
+#main .tab-box2 ul li {
+	float:right;
+	width:50px;
+	height:10px;
+	background-color:#ccc;
+	border:1px solid#999;
+	margin-top:10px;
+	margin-right:5px;
+	border-radius:10px;
+	cursor:pointer;
+}
+#main .tab-box div,
+#main .tab-box2 div { width:100%; text-align:center; }
+#main .tab-box div { line-height:200px; }
+#main .tab-box ul li.selected,
+#main .tab-box2 ul li.selected { background-color:#fc6; cursor:default; }
+/* 공지 */
+#main #notice_list { list-style:disc; text-align:left; margin-left:20px; }
+/* 순위 테이블 */
+/* 테이블 첫번째 열*/
+#main #mtfirst { width:40px; text-align:center; }
+/* 테이블 두번째, 세번째 열 */
+#main #mtsecond, #mtthird { width:80px; text-align:center; }
+
+
+/*siteinfo*/
+div#radio-group-information   { 
+   text-align:left;
+   width:800px;
+   padding:10px;
+   border:1px solid #666;
+   border-radius: 10px;
+}
+
+
+/* sitemap */
+#sitemap .table	{ text-align:left; }
+#sitemap .quiz	{ padding-left:10px; }
+
+
+/* manual */
+#manual #manual-content	{ 
+	text-align:left;
+	width:800px;
+	padding:10px;
+   	border:1px solid #666;
+   	border-radius: 10px;
+}

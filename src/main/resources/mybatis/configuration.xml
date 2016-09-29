@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="kr.ac.readingbetter.vo.MemberVo" alias="membervo" />
+		<typeAlias type="kr.ac.readingbetter.vo.WishbookVo" alias="wishbookvo" />
+		<typeAlias type="kr.ac.readingbetter.vo.SchoolVo" alias="schoolvo" />
+		<typeAlias type="kr.ac.readingbetter.vo.NoticeVo" alias="noticevo" />
+		<typeAlias type="kr.ac.readingbetter.vo.BookVo" alias="bookvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.AccusationVo" alias="accusationvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.BoardVo" alias="boardvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.CommentsVo" alias="commentsvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.AuthorVo" alias="authorvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.PublisherVo" alias="publishervo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.QuizVo" alias="quizvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.ShopVo" alias="shopvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.CardVo" alias="cardvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.ReviewVo" alias="reviewvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.HistoryVo" alias="historyvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.ScoresVo" alias="scoresvo"/>
+		<typeAlias type="kr.ac.readingbetter.vo.CertificationVo" alias="certificationvo"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/mappers/member.xml" />
+		<mapper resource="mybatis/mappers/wishbook.xml" />
+		<mapper resource="mybatis/mappers/school.xml" />
+		<mapper resource="mybatis/mappers/notice.xml" />		
+		<mapper resource="mybatis/mappers/book.xml" />
+		<mapper resource="mybatis/mappers/accusation.xml" />
+		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="mybatis/mappers/comments.xml" />
+		<mapper resource="mybatis/mappers/author.xml" />
+		<mapper resource="mybatis/mappers/publisher.xml" />
+		<mapper resource="mybatis/mappers/quiz.xml" />
+		<mapper resource="mybatis/mappers/shop.xml" />
+		<mapper resource="mybatis/mappers/card.xml" />
+		<mapper resource="mybatis/mappers/review.xml" />
+		<mapper resource="mybatis/mappers/history.xml" />
+		<mapper resource="mybatis/mappers/scores.xml" />
+		<mapper resource="mybatis/mappers/certification.xml" />
+	</mappers>
+	
+</configuration>

@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+@import "readingbetter.css";
+
+/* 테이블 공통 */
+#radio-group	{
+	text-align:center;
+   	width:900px;
+   	padding:10px;
+   	border:1px solid #666;
+   	border-radius:10px;
+   	margin:20px auto;
+}
+
+/* info */
+#info #radio-group	{ 
+   text-align:center;
+   width:400px;
+   padding:10px;
+   border:1px solid #666;
+   border-radius:10px;
+   margin:20px auto;
+}
+#info #img-mypage	{ width:100px; height:100px; border:1px solid #333 }   
+#info #myscore-table	{ width:50%; margin-left:auto; margin-right:auto; }
+
+
+/* login */
+#login #img-login    { width:200px; height:200px; border:1px solid #333 }
+#login #radio-group	{ 
+   text-align:center;
+   width:400px;
+   padding:10px;
+   border:1px solid #666;
+   border-radius:10px;
+   margin:20px auto;
+}
+
+
+/* history */
+#history #myactivity { text-align:center; margin-left:18% }
+#history #img {
+   width:150px;
+   height:150px;
+   border:1px solid #333;
+   margin-left:190px;
+}
+#history #history-table {
+   width:70%;
+   height:auto;
+   margin-left:auto;
+   margin-right:auto;
+   font-size:1em;
+}
+#history #history-table th { font-size:1.1em; text-align:center;}
+#history .col-lg-6 { margin-left:auto; margin-right:auto; }
+#history #info-table {
+   width:40%;
+   margin-top:40px;
+   margin-bottom:40px;
+   margin-left:70px;
+}
+#history #idtext {
+   font-weight:bold;
+   font-size:1em;
+   text-align:center;
+   width:150px;
+   margin-left:250px;
+   margin-right:auto;
+}

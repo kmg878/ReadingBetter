@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+
+	<!-- 공지 리스트, 회원 테이블에서 회원 이름 가져옴 -->
+	<select id="list" parameterType="noticevo" resultType="noticevo">
+		<![CDATA[
+			select a.no, a.title, a.content, a.reg_date as regDate, 
+			a.view_count as viewCount, a.member_no as memberNo, b.name 
+			from notice a, member b where a.member_no=b.no
+		]]>
+	</select>
+	
+	<!-- 페이징 공지 리스트, 회원 테이블에서 회원 이름 가져옴 -->
+	<select id="listPage" parameterType="noticevo" resultType="noticevo">
+		<![CDATA[
+			select no, title, content, reg_date as regDate, 
+			view_count as viewCount, member_no as memberNo, name, rn from
+			(select c.*, rownum as rn from
+			(select a.*, b.name from notice a, member b 
+			where a.member_no=b.no order by a.no desc) c) 
+			where (#{noticePage}-1)*10+1 <= rn and rn <= #{noticePage}*10
+		]]>
+	</select>
+	
+	<!-- 기본키에 따른 공지 조회, 회원 테이블에서 회원 이름 가져옴 -->
+	<select id="getByNo" parameterType="long" resultType="noticevo">
+		<![CDATA[
+			select a.no, a.title, a.content, 
+			to_char(a.reg_date, 'yyyy-mm-dd') as regDate, 
+			a.view_count as viewCount, a.member_no as memberNo, 
+			b.name from notice a, member b 
+			where a.member_no=b.no and a.no=#{no}
+		]]>
+	</select>
+	
+	<!-- 공지 총 수 -->
+	<select id="listCount" parameterType="long" resultType="integer">
+		<![CDATA[
+			select count(*) from notice
+		]]>
+	</select>
+	
+	<!-- 검색 회원 리스트 -->
+	<insert id="insert" parameterType="noticevo">
+		<![CDATA[
+			insert into notice 
+			values(seq_notice.nextval,#{title},#{content},sysdate,0, #{memberNo})
+		]]>
+	</insert>
+	
+	<!-- 공지 내용 수정 -->
+	<update id="update" parameterType="noticevo">
+		<![CDATA[
+			update notice set title=#{title}, content=#{content} where no=#{no}
+		]]>
+	</update>
+	
+	<!-- 조회수 업데이트 -->
+	<update id="viewCount" parameterType="noticevo">
+		<![CDATA[
+			update notice set view_count=view_count+1 where no=#{no}
+		]]>
+	</update>
+	
+</mapper>

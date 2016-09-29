@@ -1,0 +1,90 @@
+*				{ margin:0; padding:0 }
+body			{ font:13px "맑은 고딕", 돋움, 굴림; text-align:center; }
+html, body		{ height :100% !important;}
+ul, ol			{ list-style-type: none }
+
+.container-fluid {height: 83%;}
+#header {
+	height: 100%;
+	background-color: #B6E1EA;
+	padding: 10px;
+}
+
+.asideWrap {height: 100%;}
+#aside {
+	background-color: #D9F0F4;
+	height: 100%;
+	width: 200px;
+}
+
+#content {
+	width: 82%;
+	height: auto;
+}
+
+#footer {
+	height: 60px;
+	background-color: #F3FAFB;
+}
+
+.small-menu,
+.menu-title {
+   text-align: right;
+   margin: 20px;
+   font-size: 1.25em;
+}
+
+.small-menu a {
+   font-weight: bold;
+   text-decoration: underline;
+}
+
+.menu-title {
+   text-align: left;
+   font-weight: bold;
+}
+
+/* header */
+div#header	img		{ height:70px; line-height:70px; margin:0; padding-left:10px; color:#79B30B; float: left; }
+div#header	ul		{ height:20px; margin:0 20px 10px 0 } 
+div#header	li		{ float:right }
+div#header	a 		{ color:#4F4F4F; font-weight:bold; margin-left:10px; text-decoration:none; }
+div#header div a { margin: 50px; }
+
+/* navigation */
+div#navigation   { background-color:#D9F0F4; height: 100%; font-size:15px; }
+div#navigation ul   { width:100%;}
+div#navigation li   { width:100%; background-color:#D9F0F4; border:1px solid #DADADA;}
+div#navigation li a   { display:block; color:#4F4F4F; width:100%; padding:5px 10px;}
+div#navigation li:hover { background-color:#F7FCFD; }
+div#navigation p#category {
+   width: 100%;
+   text-align: left;
+   font-size: 1.5em;
+   margin: 10px 0;
+   color: #f55;
+}
+
+/* 검색 */
+#search_form {
+	width:100%;
+	text-align:center;
+	margin:20px;
+}
+
+input[type="text"]	{
+	padding:5px; 
+	border:1px solid #aaa
+}
+
+input[type="submit"] {
+	padding:5px; 
+	border:1px solid #aaa;
+	background-color: #aaa;
+	font-weight:bold;
+	color:#fff;
+}
+
+input#kwd	{
+	width:250px;
+}

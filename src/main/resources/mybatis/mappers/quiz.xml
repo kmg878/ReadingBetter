@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="quiz">
+	
+	<!-- 퀴즈 리스트, 책 테이블에서  책 이름 가져옴 -->
+	<select id="list" parameterType="quizvo" resultType="quizvo">
+		<![CDATA[
+			select a.no, b.title, a.quiz, a.ex1, a.ex2, a.ex3, a.ex4, a.answer, 
+			a.accept, a.book_no as bookNo from quiz a, book b 
+			where a.book_no=b.no order by b.title
+		]]>
+	</select>
+
+	<!-- 기본키에 따른 조회, 책 테이블에서  책 이름 가져옴 -->
+	<select id="getByNo" parameterType="long" resultType="quizvo">
+		<![CDATA[
+			select a.no, b.title, a.quiz, a.ex1, a.ex2, a.ex3, a.ex4, a.answer, 
+			a.accept, a.book_no as bookNo from quiz a, book b 
+			where a.book_no=b.no and a.no=#{no}
+		]]>
+	</select>
+	
+	<!-- 랜덤으로 배열 후, 상위 5개 퀴즈 조회 -->
+	<select id="selectQuiz" parameterType="Long" resultType="quizvo">
+		<![CDATA[
+			select no, quiz, ex1, ex2, ex3, ex4 
+			from (select * from quiz where accept=1 and book_no=#{no} 
+			order by dbms_random.value) where rownum <= 5
+		]]>
+	</select>
+
+	<!-- 기본키와 정답에 따른 조회 -->
+	<select id="selectResult" parameterType="quizvo" resultType="quizvo">
+		<![CDATA[
+			select * from quiz where no=#{no} and answer=#{selected}
+		]]>
+	</select>
+
+	<!-- 퀴즈 승인여부 업데이트 -->
+	<update id="update" parameterType="quizvo">
+		<![CDATA[
+			update quiz set accept=#{accept} where no=#{no}
+		]]>
+	</update>
+
+	<!-- 관리자용 퀴즈 추가 -->
+	<insert id="insertForAdmin" parameterType="quizvo">
+		<![CDATA[
+			insert into quiz 
+			values(seq_quiz.nextval, #{quiz}, #{ex1}, #{ex2}, #{ex3}, #{ex4}, #{answer}, 1, #{bookNo})
+		]]>
+	</insert>
+
+	<!-- 사용자용 퀴즈 추가 -->
+	<insert id="insertForUser" parameterType="quizvo">
+ 		<![CDATA[
+ 			insert into quiz 
+ 			values(seq_quiz.nextval, #{quiz}, #{ex1}, #{ex2}, #{ex3}, #{ex4}, #{answer}, 0, #{bookNo})
+ 		]]>
+	</insert>
+
+</mapper>

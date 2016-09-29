@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="scores">
+
+	<!-- 한 달 점수 랭킹 (상위 10명) -->
+	<select id="monthlyRank" parameterType="scoresvo" resultType="scoresvo">
+		<![CDATA[
+			select rank, id, monthlyscore 
+			from (select rank() over(order by score desc) as rank, id, 
+			score as monthlyScore from scores, member 
+			where member.no = scores.member_no) where rownum<=10
+		]]>
+	</select>
+
+	<!-- 한 달 점수 랭킹 (상위 5명) -->
+	<select id="monthlyMainRank" parameterType="scoresvo" resultType="scoresvo">
+		<![CDATA[
+			select rank, id, monthlyScore 
+			from (select rank() over(order by score desc) as rank, id, 
+			score as monthlyScore from scores, member 
+			where member.no = scores.member_no) where rownum<=5
+		]]>
+	</select>
+
+	<!-- 나의 한 달 점수 랭킹 -->
+	<select id="myMonthlyRank" parameterType="long" resultType="scoresvo">
+		<![CDATA[
+			select rank, id, myMonthlyscore 
+			from (select rank() over(order by score desc) rank, id, no, 
+			score as myMonthlyScore from scores, member 
+			where member.no = scores.member_no) where no=#{no}
+		]]>
+	</select>
+
+	<!-- 종합 점수 랭킹 (명예의 전당) -->
+	<select id="honor" parameterType="scoresvo" resultType="scoresvo">
+		<![CDATA[
+			select rank, id, totalscore 
+			from (select rank() over(order by scores.total_score desc) as rank, 
+			id, scores.total_score as totalscore from scores, member 
+			where member.no = scores.member_no) where rownum<=10
+		]]>
+	</select>
+
+	<!-- 종합 점수 랭킹 5명(명예의 전당) -->
+	<select id="mainHonor" parameterType="scoresvo" resultType="scoresvo">
+		<![CDATA[
+			select rank, id, totalscore 
+			from (select rank() over(order by scores.total_score desc) as rank, 
+			id, scores.total_score as totalscore from scores, member 
+			where member.no = scores.member_no) where rownum<=5
+		]]>
+	</select>
+
+	<!-- 나의 종합 점수 랭킹 (명예의 전당) -->
+	<select id="myTotalRank" parameterType="long" resultType="scoresvo">
+		<![CDATA[
+			select rank, id, myTotalScore 
+			from (select rank() over(order BY scores.total_score desc) rank, 
+			id, no, scores.total_score as myTotalScore 
+			from scores, member where member.no = scores.member_no) 
+			where no=#{no}
+		]]>
+	</select>
+
+	<!-- 종합 점수 랭킹 (top 3) -->
+	<select id="totalTopRanker" parameterType="scoresvo" resultType="scoresvo">
+		<![CDATA[
+			select rank, id 
+			from (select rank() OVER(order BY scores.total_score desc) as rank, 
+			id, scores.total_score as totalscore from scores, member 
+			where member.no = scores.member_no) 
+			where rownum<=3 order by rank asc
+		]]>
+	</select>
+
+	<!-- 학교별 랭킹 -->
+	<select id="schoolRank" parameterType="scoresvo" resultType="scoresvo">
+		<![CDATA[
+			select rank, title, schoolscore 
+			from (select rank() OVER(ORDER BY SchoolScore DESC) as rank, title, schoolscore 
+			from (select b.school_no,sum(a.score) as SchoolScore 
+			from scores a, member b where b.no=a.member_no 
+			group by school_no, b.school_no) a,school b 
+			where b.no=a.school_no and NOT (title = '기타') 
+			order by rank asc) where rownum <= 10 
+		]]>
+	</select>
+
+	<!-- 로그인 한 회원의 학교 랭킹 -->
+	<select id="mySchoolRank" parameterType="String" resultType="scoresvo">
+		<![CDATA[
+			select sno, rank, title, mySchoolScore 
+			from(select b.no as schoolno, rank() OVER(ORDER BY mySchoolScore DESC) as rank, title, mySchoolScore, b.NO as sno 
+			from (select b.school_no, sum(a.score) as mySchoolScore 
+			from scores a, member b where b.no=a.member_no 
+			group by school_no, b.school_no) a, school b 
+			where b.no=a.school_no and NOT(title='기타')), member 
+			where MEMBER.school_no=sno and id=#{id}
+		]]>
+	</select>
+
+	<!-- 학년별 랭킹 -->
+	<select id="monthlygrade" parameterType="integer" resultType="scoresvo">
+		<![CDATA[
+			select grade, rank, id, score 
+			from (select rank() over(order by score desc) rank, 
+			b.id as id, b.grade as grade, a.score as score 
+			from scores a,member b where b.no=a.member_no and grade = #{grade}) 
+			where rownum <= 10
+		]]>
+	</select>
+	
+	<!-- 회원의 학년 랭킹 (요약페이지 용) -->
+	<select id="monthlyMyGrade" parameterType="String" resultType="scoresvo">
+		<![CDATA[
+			select grade, rank, id, score
+			from (select rank() over(order by score desc) rank,
+			             b.id as id,
+			             b.grade as grade,
+			             a.score as score
+			        from scores a,member b
+			       where b.no=a.member_no
+			         and grade = (select grade from member where id=#{id}))
+			where rownum <= 10
+	      ]]>
+	</select>
+	
+	<!-- 회원의 학년 내 랭킹 -->
+	<select id="monthlyMyGradeRank" parameterType="String" resultType="scoresvo">
+		<![CDATA[
+			select grade, rank, id, score 
+			from (select rank() over(order by score desc) rank,
+				             b.id as id,
+				             b.grade as grade,
+				             a.score as score
+				        from scores a,member b
+				       where b.no=a.member_no
+				         and grade = (select grade from member where id=#{id}))
+				where id = #{id}
+	      ]]>
+	</select>
+	
+	<!-- 기본키에 따른 점수 조회 -->
+	<select id="selectScores" parameterType="long" resultType="scoresvo">
+		<![CDATA[
+			select member_no as memberNo, score, point, total_score as totalScore 
+				from scores 
+				where member_no=#{memberNo}
+		]]>
+	</select>
+
+	<!-- 퀴즈 결과에 따른 업데이트 -->
+	<update id="updateScores" parameterType="historyvo">
+		<![CDATA[
+			update scores 
+				set score=score+#{score}, 
+					total_score=total_score+#{score}, 
+					point=point+#{point} 
+				where member_no=#{memberNo}
+		]]>
+	</update>
+
+	<!-- 로그인시 점수 테이블에 자동 추가 -->
+	<insert id="insertScores" parameterType="long">
+		<![CDATA[
+			insert into scores values(#{no}, 0, 0, 0)
+		]]>
+	</insert>
+	
+	<!-- 상점 점수 차감 -->
+ 	<update id="updateshop" parameterType="scoresvo">
+ 		<![CDATA[
+ 			update scores set point=#{point} where member_no=#{memberNo}
+ 		]]>
+ 	</update>
+
+</mapper>

@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+
+* { margin: 0; padding: 0; }
+body { font: 13px "맑은 고딕", 돋움, 굴림; text-align: center; }
+html, body { height: 100% !important; }
+ul, ol { list-style-type: none }
+
+h4 {
+	font-weight: bold;
+}
+
+.admin-header {
+	margin: 10px;
+}
+
+td.left-label {
+	width: 20%;
+	background-color: #999999;
+	color: #fff;
+	font-weight: bold;
+}
+
+.tbl-notice-list {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.tbl-notice-list td, .tbl-notice-list th {
+	text-align: center;
+}
+
+#content {
+	height: 100px;
+	text-align: left;
+}
+
+#buttons {
+	text-align: right;
+	margin-right: 15%;
+}
+
+/* notice list */
+#ntitle {
+	text-align: left;
+}
+
+/* noticewrite */
+#contents {
+	height: 100%;
+}
+
+/* shop */
+#goodsname {
+	width: 60%;
+	margin-left: 15%;
+	margin-right: 2%;
+}
+
+#searchgoods {
+	width: 100px;
+}
+
+/* admin 테이블 공통 */
+#board th, #board td {
+	vertical-align: middle;
+}
+
+#goodsimage {
+	width: 150px;
+	height: 150px;
+}
+
+/* 이미지 크기 */
+.img-thumbnail	{
+	height:80px;
+}

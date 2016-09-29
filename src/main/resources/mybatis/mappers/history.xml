@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="history">
+
+	<insert id="insertHistory" parameterType="historyvo">
+		<![CDATA[
+			insert into history values(
+				seq_history.nextval, 
+				#{title},
+				#{score}, 
+				#{point}, 
+				sysdate,
+				#{memberNo}, 
+				#{identity}, 
+				#{keyNo})
+		]]>
+	</insert>
+	
+	<select id="list" parameterType="historyvo" resultType="historyvo">
+		<![CDATA[
+			select no,title,score,point,reg_date as regDate, 
+			member_no as memberNo,identity,key_no from history 
+			where member_no=#{memberNo} order by reg_date desc
+		]]>
+	</select>
+
+</mapper>

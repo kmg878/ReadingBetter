@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="card">
+
+	<!-- 전체 카드 목록/검색 내용 조회 -->
+	<select id="getList" parameterType="cardvo" resultType="cardvo">
+		<![CDATA[
+			select no, title, skill, bonus, cover from card 
+			where title like '%' || #{title} || '%' order by no desc
+		]]>
+	</select>
+	
+	<!-- 번호로 카드 조회 (수정 폼에서 이용) -->
+	<select id="getByNo" parameterType="long" resultType="cardvo">
+		<![CDATA[
+			SELECT NO, TITLE, CONTENT, SKILL, BONUS, COVER FROM CARD 
+			where no=#{no}
+		]]>
+	</select>
+	
+	<!-- 문제 풀기 후, 랜덤으로 카드 배열 후, 상위 1개 조회 -->
+	<select id="selectCardByRandom" resultType="cardvo">
+		<![CDATA[
+			select title, content, skill, bonus, cover 
+			from (select no, title, content, skill, bonus, cover from card order by dbms_random.value) 
+			where rownum=1
+		]]>
+	</select>
+
+	<!-- 카드 등록 -->
+	<insert id="insert" parameterType="cardvo">
+		<![CDATA[
+			INSERT INTO "CARD" 
+			VALUES(SEQ_CARD.NEXTVAL, #{title}, #{content}, #{skill}, #{bonus}, #{cover})
+		]]>
+	</insert>
+
+	<!-- 카드 삭제 -->
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			DELETE FROM CARD WHERE NO=#{no}
+		]]>
+	</delete>
+
+	<!-- 카드 수정 -->
+	<update id="update" parameterType="cardvo">
+		<![CDATA[
+			UPDATE "CARD" SET TITLE=#{title}, CONTENT=#{content}, 
+			SKILL=#{skill}, BONUS=#{bonus}, COVER=#{cover} WHERE NO=#{no}
+		]]>
+	</update>
+	
+</mapper>

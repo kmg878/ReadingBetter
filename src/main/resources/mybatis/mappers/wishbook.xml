@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wishbook">
+
+	<!-- 희망도서 리스트 -->
+	<select id="list" resultType="wishbookvo">
+		<![CDATA[
+			select w.no, w.title, m.NAME, w.recommend, w.accept 
+			from wishbook w, member m where w.MEMBER_NO = m.NO 
+			order by w.recommend desc
+		]]>
+	</select>
+	
+	<!-- 기본키에 따른 희망도서 조회 -->
+	<select id="getByNo" parameterType="long" resultType="wishbookvo">
+		<![CDATA[
+			select w.title, w.publisher, w.reason, 
+			to_char(w.reg_date, 'yyyy-mm-dd') as regDate, w.recommend, 
+			w.accept, m.name from wishbook w, member m 
+			where w.MEMBER_NO=m.NO and w.no=#{no}
+		]]>
+	</select>
+	
+	<!-- 희망도서에서 출판사 추가 -->
+	<insert id="insertPublisher" parameterType="wishbookvo">
+		<![CDATA[
+			insert into publisher values(seq_publisher.nextval, #{publisher})
+		]]>
+	</insert>
+	
+	<!-- 희망도서에서 책추가 -->
+	<insert id="insertBook" parameterType="wishbookvo">
+		<![CDATA[
+			insert into book 
+			values(seq_book.nextval, #{title}, 0, '', 
+			(select no from publisher 
+			where title=(select publisher from wishbook where no=#{no})), null)
+		]]>
+	</insert>
+	
+	<!-- 희망도서 추가 -->
+	<insert id="insertWishbook" parameterType="wishbookvo">
+		<![CDATA[
+			insert into wishbook values(
+				seq_wishbook.nextval, 
+				#{title}, 
+				#{publisher}, 
+				#{reason}, 
+				sysdate, 
+				0, 
+				0, 
+				#{memberNo})
+		]]>
+	</insert>
+	
+	<!-- 희망도서 승인시 업데이트 -->
+	<update id="updateAcceptToOne" parameterType="wishbookvo">
+		<![CDATA[
+			update wishbook set accept=1 where no=#{no}
+		]]>
+	</update>
+	
+	<!-- 희망도서 반려시 업데이트 -->
+	<update id="updateAcceptToTwo" parameterType="wishbookvo">
+		<![CDATA[
+			update wishbook set accept=2 where no=#{no}
+		]]>
+	</update>
+	
+	<!-- 희망도서 추천수 업데이트 -->
+	<update id="updateRecommend" parameterType="long">
+		<![CDATA[
+			update wishbook set recommend=recommend+1 where no=#{no}
+		]]>
+	</update>
+	
+</mapper>

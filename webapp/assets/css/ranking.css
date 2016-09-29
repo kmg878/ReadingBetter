@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+@import "readingbetter.css";
+
+/* 랭킹 공통 */
+#title { font-weight:bold; text-align:center; font-size:20px;} /* 테이블 제목 */
+#rank-table { width:70%; left:17%; right:10%; } /* 테이블 크기, 위치 지정 */
+#rank-table th { text-align:center; font-size:1.5em; } /* 테이블 상위 row 폰트 속성 지정 */
+#rank-table td { text-align:center; font-size:1em; } /* 테이블 상위 제외한 나머지 부분 폰트 속성 지정 */
+
+
+/* summary */
+#summary #table { width:50%; } /* 왼쪽 테이블 묶음 */
+#summary #ltable,
+#summary #rtable { /* summary 테이블 공통*/
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+}
+#summary #ltable th,
+#summary #rtable th { font-size:1.5em; text-align:center;} /* 테이블 첫번쨰 행*/
+#summary #ltable td,
+#summary #rtable td { font-size:1em; } /* 테이블 첫번째 행을 제외한 나머지 행 */
+
+/* honor */
+#honor #top3-image { width:160px; height:160px; }
+#honor #honor-table th { font-size:1.5em; text-align:center; }
+#honor #myhonor { width:80%; margin-right:auto; margin-left:auto; }
+#honor #myhonor th { font-size:1.2em; text-align:center; }
+#honor #top3text { vertical-align: middle; font-size:2em; margin-left:auto; margin-right:auto; }
+#honor #top3text mark { color: #FF8080; text-shadow: 0.025em 0.025em 0.075em #333; }
+#honor #top3text .top3line { color:#FFFFFF; }

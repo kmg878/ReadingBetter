@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+@import "readingbetter.css";
+
+/*shop*/
+#shop #img-shop	{ width:200px; height:200px; }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="certification">
+
+	<!-- 회원번호와 책번호에 따른 조회 -->
+	<select id="selectCertification" parameterType="certificationvo" resultType="certificationvo">
+		<![CDATA[
+			select no from certification 
+			where member_no=#{memberNo} and book_no=#{bookNo}
+		]]>
+	</select>
+	
+	<!-- 인증 추가 -->
+	<insert id="insertCertification" parameterType="certificationvo">
+		<![CDATA[
+			insert into certification 
+			values(seq_certification.nextval, #{memberNo}, #{bookNo})
+		]]>
+	</insert>
+
+</mapper>
