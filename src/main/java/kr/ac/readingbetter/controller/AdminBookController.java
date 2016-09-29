@@ -61,12 +61,13 @@ public class AdminBookController {
 		return "admin/bookaddform";
 	}
 
+	
 	@RequestMapping(value = "/checkbook", method = RequestMethod.POST)
 	@ResponseBody
 	public void checkBook(@RequestParam(value = "title") String title) {
-		System.out.println(title);
-
 		List<BookVo> bookList = adminBookService.checkBook(title);
-		System.out.println(bookList);
+		
+		if(bookList==null){
+		}
 	}
 }

@@ -24,5 +24,18 @@
 			where member_no=#{memberNo} order by reg_date desc
 		]]>
 	</select>
+	
+	<select id="listpage" parameterType="historyvo" resultType="historyvo">
+		<![CDATA[
+		select *
+  		from(
+        select rownum as rnum,no,title,score,point,reg_date as regDate, 
+			member_no as memberNo,identity,key_no from history 
+			where member_no=#{memberNo}
+     			 order by reg_date desc
+        		)
+        	where (#{pageNo}-1)*5+1 <= rnum  and rnum <= #{pageNo}*5
+		]]>
+	</select>
 
 </mapper>

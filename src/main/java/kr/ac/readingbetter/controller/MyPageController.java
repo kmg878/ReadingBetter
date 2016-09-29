@@ -84,8 +84,32 @@ public class MyPageController {
 		model.addAttribute("scoresVo", scoresVo);
 
 		historyvo.setMemberNo(authUser.getNo());
+		
+		if (historyvo.getPageNo() == null) {
+			historyvo.setPageNo(1);
+		}
 		List<HistoryVo> list = historyService.getList(historyvo);
-		model.addAttribute("historylist", list);
+		List<HistoryVo> listpage = historyService.getListPage(historyvo);
+		int pageLength = 5;
+		int beginPage;
+		int currentBlock = (int) Math.ceil((double) historyvo.getPageNo() / pageLength);
+
+		int currentPage = historyvo.getPageNo();
+		beginPage = (currentBlock - 1) * 3 + 1;
+
+		int total = (int) Math.ceil((double) list.size() / pageLength);
+		int endPage = currentBlock * 3;
+		if (endPage > total) {
+			endPage = total;
+		}
+
+		model.addAttribute("beginPage", beginPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("total", total);
+		
+		
+		model.addAttribute("historylist", listpage);
 
 		return "mypage/history";
 	}

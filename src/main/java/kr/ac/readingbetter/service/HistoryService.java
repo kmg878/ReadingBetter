@@ -21,4 +21,10 @@ public class HistoryService {
 		List<HistoryVo> list = historyDao.getList(vo);
 		return list;
 	}
+	// 페이징 리스트
+		public List<HistoryVo> getListPage(HistoryVo vo) {
+			List<HistoryVo> list = historyDao.getListPage(vo);
+			return list;
+		}
+
 }

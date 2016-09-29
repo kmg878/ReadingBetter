@@ -21,4 +21,10 @@ public class HistoryDao {
 		List<HistoryVo> list = sqlSession.selectList("history.list", vo);
 		return list;
 	}
+	
+	// 페이징 리스트
+		public List<HistoryVo> getListPage(HistoryVo vo) {
+			List<HistoryVo> list = sqlSession.selectList("history.listpage", vo);
+			return list;
+		}
 }
