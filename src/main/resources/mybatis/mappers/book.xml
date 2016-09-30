@@ -87,5 +87,18 @@
 			insert into book values(seq_book.nextval,#{title},#{recommend},#{cover},#{publisherNo},#{authorNo})
 		]]>
 	</insert>
+	
+	<!-- 페이징  관리자 리스트, 출판사 테이블에서  출판사명 가져옴, 작가 테이블에서 작가 이름 가져옴 -->
+	<select id="adminlistPage" parameterType="bookvo" resultType="bookvo">
+		<![CDATA[
+			select * from (select rownum as rnum, a.no, a.title, a.recommend, 
+			a.cover, b.title as publisherTitle, c.name as authorName 
+			from book a, publisher b,author c 
+ 			where b.no=a.publisher_no and c.no=a.author_no 
+ 			order by a.no desc) 
+ 			where (#{pageNo}-1)*5+1<=rnum and rnum<=#{pageNo}*5   				
+		]]>
+	</select>
+	
 
 </mapper>

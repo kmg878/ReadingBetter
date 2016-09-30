@@ -39,6 +39,40 @@
 				</tr>
 	 		</c:forEach>
 		</table>
+		
+		<!-- begin:paging -->
+					<div class="pager">
+						<ul>
+							<c:if test="${beginPage>1 }">
+								<li>
+									<a href="/readingbetter/admin/booklist?pageNo=${beginPage-1 }">◀</a>
+									<input type="hidden" name="pageNo" value="${beginPage-1 }">
+								</li>
+							</c:if>
+							<c:forEach begin='${beginPage }' end='${endPage }' step='1' var='i'>
+								<c:choose>
+									<c:when test='${currentPage == i }'>
+										<li class="selected">${i }</li>
+									</c:when>
+								<c:otherwise>
+									<li>
+										<a href="/readingbetter/admin/booklist?pageNo=${i }">${i }</a>
+										<input type="hidden" name="pageNo" value="${i}">
+									</li>
+								</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						
+							<c:if test='${endPage<total }'>
+								<li>
+									<a href="/readingbetter/admin/booklist?pageNo=${endPage+1 }">▶</a>
+									<input type="hidden" name="pageNo" value="${endPage+1}">
+								</li>
+							</c:if>
+						</ul>
+					</div>
+		<!-- end:paging -->
+		
 	</div>
 </body>
 </html>

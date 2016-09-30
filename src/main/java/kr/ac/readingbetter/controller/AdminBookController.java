@@ -38,9 +38,32 @@ public class AdminBookController {
 
 	// 도서 관리
 	@RequestMapping("/booklist")
-	public String bookList(Model model) {
+	public String bookList(BookVo bookvo,Model model) {
+		int pageLength = 5;
+		int beginPage;
+		if (bookvo.getPageNo() == null) {
+			bookvo.setPageNo(1);
+		}
 		List<BookVo> list = bookService.getList();
-		model.addAttribute("list", list);
+		List<BookVo> listpage=bookService.getAdminListPage(bookvo);
+		model.addAttribute("list", listpage);
+		
+		int currentBlock = (int) Math.ceil((double) bookvo.getPageNo() / pageLength);
+
+		int currentPage = bookvo.getPageNo();
+		beginPage = (currentBlock - 1) * 5 + 1;
+
+		int total = (int) Math.ceil((double) list.size() / pageLength);
+		int endPage = currentBlock * 5;
+		if (endPage > total) {
+			endPage = total;
+		}
+
+		model.addAttribute("beginPage", beginPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("total", total);
+		
 		return "admin/booklist";
 	}
 

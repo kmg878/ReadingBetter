@@ -19,6 +19,11 @@ public class BookDao {
 		List<BookVo> list = sqlSession.selectList("book.list");
 		return list;
 	}
+	// 관리자페이징 리스트
+		public List<BookVo> getAdminListPage(BookVo vo) {
+			List<BookVo> list = sqlSession.selectList("book.adminlistPage", vo);
+			return list;
+		}
 
 	// 페이징 리스트
 	public List<BookVo> getListPage(BookVo vo) {

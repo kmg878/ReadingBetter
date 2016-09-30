@@ -19,6 +19,12 @@ public class BookService {
 		List<BookVo> list = bookDao.getList();
 		return list;
 	}
+	// 사용자 페이징 리스트
+		public List<BookVo> getAdminListPage(BookVo vo) {
+			List<BookVo> list = bookDao.getAdminListPage(vo);
+			return list;
+		}
+
 
 	// 페이징 리스트
 	public List<BookVo> getListPage(BookVo vo) {
