@@ -25,11 +25,6 @@ public class BookDao {
 			return list;
 		}
 
-	// 페이징 리스트
-	public List<BookVo> getListPage(BookVo vo) {
-		List<BookVo> list = sqlSession.selectList("book.listPage", vo);
-		return list;
-	}
 
 	public List<BookVo> getListKwd(BookVo vo) {
 		List<BookVo> list = sqlSession.selectList("book.listKwd", vo);

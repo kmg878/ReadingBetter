@@ -36,13 +36,13 @@
 	<!-- 페이징 ,도서 검색 -->
 	<select id="listkwdpage" parameterType="wishbookvo" resultType="wishbookvo">
 		<![CDATA[
-		select * from 
+		select rownum as rnum,c.* from (
 			(select rownum as rnum,w.no, w.title, m.NAME, w.recommend, w.accept,w.reg_date as regDate
 			from wishbook w, member m
 			where w.MEMBER_NO = m.NO 
 			and title 
-			like '%' || #{wKwd} || '%' order by w.recommend desc)
-		where (#{pageNo}-1)*5+1<=rnum and rnum<=#{pageNo}*5   			
+			like '%' || #{wKwd} || '%' order by w.recommend desc) c)
+		where (#{pageNo}-1)*5+1<=rnum and rnum<=#{pageNo}*5   				
 		]]>
 	</select>
 	
@@ -69,7 +69,7 @@
 			insert into book 
 			values(seq_book.nextval, #{title}, 0, '', 
 			(select no from publisher 
-			where title=(select publisher from wishbook where no=#{no})), null)
+			where title=(select publisher from wishbook where no=#{no})),0)
 		]]>
 	</insert>
 	
