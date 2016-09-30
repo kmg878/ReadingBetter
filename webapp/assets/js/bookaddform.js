@@ -98,7 +98,7 @@ $(function(){
 				for (var i = 0; i <  publisherlist.length; i++) {
 					$("#search-publisher-result").append(
 							"<a class='search-title-result' data-dismiss='modal'>"
-									+  publisherlist[i].no +"</a>"+ publisherlist[i].title +"<br>");
+							+publisherlist[i].no + "</a>"+publisherlist[i].title+"<br>");
 				}
 			},
 			error : function(jqXHR, status, error) {
@@ -112,7 +112,7 @@ $(function(){
 	});
 	
 	$("#search-publisher-result").on("click", ".search-title-result", function() {
-		$("#publisherNo").val($(this).text());
+		$("#publisher").val($(this).text());
 	});
 });
 	

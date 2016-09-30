@@ -85,7 +85,14 @@
 							</td>
 							
 							<td>
-							성공
+							<c:choose>
+                       				 <c:when test="${vo.identity == 0}">
+                       				 <c:if test="${vo.point>2}">
+                       				 성공
+                       				 </c:if>
+                       				 </c:when>
+                       				 <c:when test="${vo.identity == 1}"> </c:when>
+              				</c:choose>
 							</td>
 							<td>${vo.regDate}</td>
 						</tr>

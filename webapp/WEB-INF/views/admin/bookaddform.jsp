@@ -46,7 +46,7 @@
 				<tr>
 					<td class="left-label">출판사</td>
 					<td>
-						<input type="text" class="form-control" id="publisherNo" value="" name="publisherNo">
+						<input type="text" class="form-control" id="publisher" value="" name="publisherNo">
 						<button id="btn_publisherModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".publisher-modal" >찾기</button>
 					</td>
 				</tr>
