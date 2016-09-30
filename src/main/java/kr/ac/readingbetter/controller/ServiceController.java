@@ -19,6 +19,7 @@ import kr.ac.readingbetter.service.CommentsService;
 import kr.ac.readingbetter.service.NoticeService;
 import kr.ac.readingbetter.service.WishbookService;
 import kr.ac.readingbetter.vo.AccusationVo;
+import kr.ac.readingbetter.vo.BookVo;
 import kr.ac.readingbetter.vo.CommentsVo;
 import kr.ac.readingbetter.vo.MemberVo;
 import kr.ac.readingbetter.vo.NoticeVo;
@@ -212,9 +213,43 @@ public class ServiceController {
 	// 희망도서
 	// 희망도서 리스트
 	@RequestMapping("/wishbooklist")
-	public String wishBookList(Model model) {
-		List<WishbookVo> list = wishbookService.getList();
-		model.addAttribute("list", list);
+	public String wishBookList(Model model,WishbookVo wishbookVo) {
+		int pageLength = 5;
+		int beginPage;
+		
+		if (wishbookVo.getPageNo() == null) {
+			wishbookVo.setPageNo(1);
+		}
+		
+		if (wishbookVo.getwKwd() == null) {
+			wishbookVo.setwKwd("");
+			List<WishbookVo> listpage = wishbookService.listPage(wishbookVo);
+			model.addAttribute("listpage",listpage);
+		}
+		
+		String wKwd = wishbookVo.getwKwd();
+		wishbookVo.setwKwd(wKwd);
+
+		List<WishbookVo> list = wishbookService.listkwd(wishbookVo);
+		List<WishbookVo> listkwd = wishbookService.listKwdPage(wishbookVo);
+		model.addAttribute("listpage",listkwd);
+		
+		int currentBlock = (int) Math.ceil((double) wishbookVo.getPageNo() / pageLength);
+
+		int currentPage = wishbookVo.getPageNo();
+		beginPage = (currentBlock - 1) * 5 + 1;
+
+		int total = (int) Math.ceil((double) list.size() / pageLength);
+		int endPage = currentBlock * 5;
+		if (endPage > total) {
+			endPage = total;
+		}
+		
+		model.addAttribute("wKwd",wKwd);
+		model.addAttribute("beginPage", beginPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("total", total);
 		return "service/wishbooklist";
 	}
 	
@@ -247,4 +282,6 @@ public class ServiceController {
 	public void wishBookRecommend(@RequestParam(value = "no") Long no) {
 		wishbookService.updateRecommend(no);
 	}
+	
+
 }

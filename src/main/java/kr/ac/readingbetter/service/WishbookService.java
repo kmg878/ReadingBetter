@@ -47,4 +47,17 @@ public class WishbookService {
 	public void updateRecommend(Long no) {
 		wishbookDao.updateRecommend(no);
 	}
+	
+	public List<WishbookVo> listkwd(WishbookVo vo){
+		 List<WishbookVo> list= wishbookDao.getListKwd(vo);
+		 return list;
+	}
+	public List<WishbookVo> listPage(WishbookVo vo){
+		 List<WishbookVo> list= wishbookDao.getListPage(vo);
+		 return list;
+	}
+	public List<WishbookVo> listKwdPage(WishbookVo vo){
+		 List<WishbookVo> list= wishbookDao.getListKwdPage(vo);
+		 return list;
+	}
 }

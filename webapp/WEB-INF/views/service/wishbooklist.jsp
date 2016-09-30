@@ -23,8 +23,8 @@
 					<a href="/readingbetter/service/noticelist">고객센터</a> > 희망도서 신청
 				</div>
 				<p class="menu-title">희망도서 신청</p>
-				<form id="search_form" action="/mysite/board" method="post">
-					<input type="text" id="kwd" name="kwd" value="${kwd }">
+				<form id="search_form" action="" method="get">
+					<input type="text" id="wKwd" name="wKwd" value="${wKwd}">
 					<input type="submit" value="찾기">
 				</form>
 				
@@ -38,7 +38,7 @@
 							<th>작성일</th>
 							<th>승인</th>
 						</tr>
-						<c:forEach var='vo' items='${list }'>
+						<c:forEach var='vo' items='${listpage }'>
 							<tr>
 								<td>${vo.no }</td>
 								<td><a href="/readingbetter/service/wishbookview?no=${vo.no }">${vo.title }</a></td>
@@ -65,14 +65,32 @@
 					<!-- begin:paging -->
 					<div class="pager">
 						<ul>
-							<li>
-								<li><a href="">◀</a></li>
-								<li><a href="">1</a></li>
-								<li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href="">4</a></li>
-								<li><a href="">5</a></li>
-								<li><a href="">▶</a></li>
+							<c:if test="${beginPage>1 }">
+								<li>
+									<a href="/readingbetter/service/wishbooklist?pageNo=${beginPage-1 }&wKwd=${wKwd}">◀</a>
+									<input type="hidden" name="pageNo" value="${beginPage-1 }">
+								</li>
+							</c:if>
+							<c:forEach begin='${beginPage }' end='${endPage }' step='1' var='i'>
+								<c:choose>
+									<c:when test='${currentPage == i }'>
+										<li class="selected">${i }</li>
+									</c:when>
+								<c:otherwise>
+									<li>
+										<a href="/readingbetter/service/wishbooklist?pageNo=${i }&wKwd=${wKwd}">${i }</a>
+										<input type="hidden" name="pageNo" value="${i}">
+									</li>
+								</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						
+							<c:if test='${endPage<total }'>
+								<li>
+									<a href="/readingbetter/service/wishbooklist?pageNo=${endPage+1 }&wKwd=${wKwd}">▶</a>
+									<input type="hidden" name="pageNo" value="${endPage+1}">
+								</li>
+							</c:if>
 						</ul>
 					</div>
 					<!-- end:paging -->

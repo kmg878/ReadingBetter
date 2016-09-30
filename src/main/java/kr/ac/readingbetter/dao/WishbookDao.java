@@ -47,4 +47,18 @@ public class WishbookDao {
 	public void updateRecommend(Long no) {
 		sqlSession.update("wishbook.updateRecommend", no);
 	}
+	
+	public List<WishbookVo> getListKwd(WishbookVo vo) {
+		List<WishbookVo> list = sqlSession.selectList("wishbook.listkwd", vo);
+		return list;
+	}
+	public List<WishbookVo> getListPage(WishbookVo vo) {
+		List<WishbookVo> list = sqlSession.selectList("wishbook.listPage", vo);
+		return list;
+	}
+	public List<WishbookVo> getListKwdPage(WishbookVo vo) {
+		List<WishbookVo> list = sqlSession.selectList("wishbook.listkwdpage", vo);
+		return list;
+	}
+	
 }
