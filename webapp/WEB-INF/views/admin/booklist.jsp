@@ -19,6 +19,7 @@
 	<div id="board">
  		<div id="button-set">
  			<a href="/readingbetter/admin/bookaddform" class="btn btn-default">추가</a>
+ 			
  		</div>
 		<table class="tbl-ex">		
 			<tr>
@@ -27,6 +28,7 @@
 				<th>작가</th>
 				<th>출판사</th>
 				<th>사진</th>
+				<th>수정</th>
 			</tr>
 			<c:set var="countList" value="${fn:length(list)}"/>
 	  		<c:forEach var='vo' items='${list}' varStatus='s'>
@@ -36,6 +38,7 @@
 					<td>${vo.authorName }</td>
 					<td>${vo.publisherTitle }</td>
 					<td><img class="img-thumbnail" src="${vo.cover }"></td>
+					<td><a href="/readingbetter/admin/bookmodifyform/${vo.no }" class="btn btn-default">수정</a></td>
 				</tr>
 	 		</c:forEach>
 		</table>

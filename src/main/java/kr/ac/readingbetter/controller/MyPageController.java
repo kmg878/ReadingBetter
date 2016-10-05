@@ -1,7 +1,10 @@
 package kr.ac.readingbetter.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.readingbetter.service.HistoryService;
 import kr.ac.readingbetter.service.MemberService;
@@ -71,6 +76,15 @@ public class MyPageController {
 
 	////////////////////////////////////////////////////////////////////////////
 
+	@RequestMapping("/historyapp")
+	@ResponseBody
+	public ScoresVo historyapp(HttpServletRequest request
+			,@RequestParam(value = "no") int no) {
+		System.out.println("연결"+no);
+		ScoresVo scoresVo = scoresService.selectScores(1L);
+		return scoresVo;
+	}
+	
 	// 내 활동
 	// 히스토리 화면 열기
 	@RequestMapping("/history")

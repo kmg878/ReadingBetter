@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,6 +80,15 @@ public class AdminBookController {
 		bookService.insert(vo);
 		return "redirect:/admin/booklist";
 	}
+	
+	// 책 수정
+		@RequestMapping(value = "/bookmodifyform/{no}", method = RequestMethod.GET)
+		public String bookmodifyform(@PathVariable("no") Long no,Model model) {
+			BookVo vo = bookService.getByNo(no);
+			model.addAttribute("vo", vo);
+			return "admin/bookmodifyform";
+		}
+	
 	
 	@RequestMapping(value = "/checkbook", method = RequestMethod.POST)
 	@ResponseBody
