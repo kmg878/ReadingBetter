@@ -76,10 +76,14 @@ public class MyPageController {
 
 	////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping("/historyapp")
+	@RequestMapping("/android")
+	public void androidTestWithRequest(HttpServletRequest request) {
+		System.out.println(request.getParameter("test"));
+	}
+	
 	@ResponseBody
-	public ScoresVo historyapp(HttpServletRequest request
-			,@RequestParam(value = "no") int no) {
+	@RequestMapping(value = "historyapp", method = RequestMethod.GET)
+	public ScoresVo historyapp(Integer no) {
 		System.out.println("연결"+no);
 		ScoresVo scoresVo = scoresService.selectScores(1L);
 		return scoresVo;
