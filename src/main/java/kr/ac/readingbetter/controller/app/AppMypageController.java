@@ -1,5 +1,5 @@
 package kr.ac.readingbetter.controller.app;
 
-public class MemberController {
+public class AppMypageController {
 
 }
