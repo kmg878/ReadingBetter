@@ -18,6 +18,11 @@ public class ReviewDao {
 		List<ReviewVo> list = sqlSession.selectList("review.getByBookNo", vo);
 		return list;
 	}
+	
+	public List<ReviewVo> getListApp(ReviewVo vo) {
+		List<ReviewVo> list = sqlSession.selectList("review.getListApp", vo);
+		return list;
+	}
 
 	public void reviewDelete(Long no) {
 		sqlSession.delete("review.delete", no);
