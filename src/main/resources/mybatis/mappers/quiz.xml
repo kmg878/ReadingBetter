@@ -24,7 +24,7 @@
 	<!-- 랜덤으로 배열 후, 상위 5개 퀴즈 조회 -->
 	<select id="selectQuiz" parameterType="Long" resultType="quizvo">
 		<![CDATA[
-			select no, quiz, ex1, ex2, ex3, ex4 
+			select no, quiz, ex1, ex2, ex3, ex4 ,answer
 			from (select * from quiz where accept=1 and book_no=#{no} 
 			order by dbms_random.value) where rownum <= 5
 		]]>

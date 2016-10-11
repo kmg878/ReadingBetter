@@ -17,7 +17,7 @@ public class ScoresDao {
 
 	// 전체 랭킹
 	public List<ScoresVo> monthlyRank(ScoresVo vo) {
-		return sqlSession.selectList("scores.monthlyRank", vo);
+		return sqlSession.selectList("scores.monthlyMainRank", vo);
 	}
 
 	// 로그인 한 회원 전체 랭킹
