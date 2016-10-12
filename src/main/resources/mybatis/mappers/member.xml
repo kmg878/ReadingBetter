@@ -58,7 +58,7 @@
 	<!-- 학교 정보가 있는 회원가입 -->
 	<insert id="insertMember" parameterType="membervo">
 		<![CDATA[
-			insert into member values(seq_member.nextval, #{id}, #{pw}, #{name}, #{email}, #{tel}, sysdate, 1, 0, #{grade}, #{classNo}, (select no from school where title=#{schoolName}))
+			insert into member values(seq_member.nextval, #{id}, #{pw}, #{name}, #{email}, #{tel}, 1, 0, #{grade}, #{classNo}, 0, (select no from school where title=#{schoolName}))
 		]]>
 	</insert>
 
